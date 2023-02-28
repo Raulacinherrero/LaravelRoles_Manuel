@@ -8,7 +8,6 @@
         </x-form.a_href>
         <x-form.a_href href="{{route('facturas.create')}}" class="mx-2">Editar </x-form.a_href>
         <x-form.a_href href="{{route('facturas.create')}}" class="mx-2">Borrar </x-form.a_href>
-
     </x-layout.menu>
 @endsection
 @section("contenido")
@@ -22,5 +21,4 @@
         Localidad  {{$cliente->localidad}}<br />
         Tipo de cliente  {{$cliente->tipo_cliente}}<br />
     </fieldset>
-
 @endsection

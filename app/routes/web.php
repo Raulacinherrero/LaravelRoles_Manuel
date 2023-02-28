@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FacturaController;
+use App\Http\Controllers\ClienteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,9 +16,9 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::resource("clientes", \App\Http\Controllers\ClienteController::class);
-Route::resource("facturas", \App\Http\Controllers\FacturaController::class);
-Route::resource("empleados", \App\Http\Controllers\EmpleadoController::class);
+// Route::resource("clientes", \App\Http\Controllers\ClienteController::class);
+// Route::resource("facturas", \App\Http\Controllers\FacturaController::class);
+// Route::resource("empleados", \App\Http\Controllers\EmpleadoController::class);
 
 
 Route::get('/', function () {
@@ -29,16 +32,16 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
-Route::middleware('auth')->group(function () {
-    Route::resource("clientes", \App\Http\Controllers\ClienteController::class);
-    Route::resource("facturas", \App\Http\Controllers\FacturaController::class);
-    Route::resource("empleados", \App\Http\Controllers\EmpleadoController::class);
+    // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::resource("clientes", ClienteController::class);
+    Route::resource("facturas", FacturaController::class);
+    Route::resource("empleados", EmpleadoController::class);
     Route::view('/', 'acceso')->name("main");
+    Route::get("empleados/idiomas/{id}", [EmpleadoControlle::class,"get_idiomas"]);
+    Route::get("cleintes/facturas/{id}", [ClienteController::class,"get_facturas"]);
+    Route::get("facturas/clientes/{id}", [FacturaController::class,"get_clientes"]);
 });
 
 require __DIR__.'/auth.php';
